@@ -22,7 +22,6 @@ exports.create = (req, res) => {
   // Save Tutorial in the database
   Tutorial.create(tutorial)
     .then(data => {
-      console.log("AAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH")
       res.send(data);
     })
     .catch(err => {
