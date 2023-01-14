@@ -8,31 +8,23 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('Tutorials', () => {
-    beforeEach((done) => {
-        db.tutorials.destroy({
+    before(async () => {
+        /*db.tutorials.destroy({
             where: {},
             truncate: false
         })
             .then(() => {
                 done();
-            });
+            });*/
+        await db.tutorials.sync({ force: true });
     });
     describe('validations of HTTP Code', () => {
-        it('should get all the tutorials', (done) => {
-        chai.request(server)
-            .get('/api/tutorials/')
-            .end((err, res) => {
-                res.should.have.status(200);
-            done();
-            });
-        });
-
         it("should create a tutorial", (done) => {
             chai.request(server)
                 .post('/api/tutorials/')
                 .send({
-                    title: 'thing1',
-                    description: 'thing1 description',
+                    title: 'tutorial',
+                    description: 'tutorial description',
                     published: true
                 })
                 .end((err, res) => {
@@ -41,13 +33,22 @@ describe('Tutorials', () => {
                 });
         });
 
-        it('should get a single thing', (done) => {
-        chai.request(server)
-            .get('/api/tutorials/1')
-            .end((err, res) => {
-                res.should.have.status(200);
-            done();
-            });
+        it('should get a single tutorial', (done) => {
+            chai.request(server)
+                .get('/api/tutorials/1')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                done();
+                });
+        });
+
+        it('should get all the tutorials', (done) => {
+            chai.request(server)
+                .get('/api/tutorials/')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                done();
+                });
         });
     });
 });
