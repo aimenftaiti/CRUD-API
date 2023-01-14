@@ -82,4 +82,6 @@ typings/
 # VS Code folder
 .vscode/
 
+docker/
+
 package-lock.json
