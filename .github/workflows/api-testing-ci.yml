@@ -1,9 +1,7 @@
 name: run api testing
 on:
     push:
-        branches: [main]
-    pull_request:
-        branches: [main]
+        branches: [dev]
 
 jobs:
     api-test:
